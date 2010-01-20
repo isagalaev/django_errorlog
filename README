@@ -1,0 +1,31 @@
+## WHAT'S THIS
+
+By default Django sends server errors by email which might be not convenient
+(you can't setup monitoring) and not always secure (a single bug in a hot place
+could overflow mail server). Django_errorlog enables logging of server errors
+with standard Python logging.
+
+## USAGE
+
+To install in a Django project:
+
+1.  Include 'django_errorlog' into INSTALLED_APPS
+
+2.  Setup handlers for log channels 'exception' and 'traceback' with usual
+    Python [logging handlers][1]. It's a good idea to have a separate file (or
+    whatever) for 'traceback' logger because its messages don't fit on a single
+    line and hence not easily grep'able.
+
+3.  To disable default mailing of server errors you can leave ADMINS setting
+    empty or not setup SMTP_HOST.
+
+The application works automatically: it listents for a signal that Django sends
+on all uncaught server errors and then logs short exception values and full
+tracebacks into their respective log channels.
+
+There are two utility functions in django_errorlog.utils: log_error and
+log_warning. They can be used to manually log exception that you do handle in
+your code. They accept exc_info (a triple of (exceptions, value, traceback) as
+an argument. If called without arguments they get it from sys.exc_info().
+
+[1]: http://docs.python.org/library/logging.html#handlers
