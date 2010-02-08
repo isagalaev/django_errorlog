@@ -1,17 +1,11 @@
 # -*- coding:utf-8 -*-
 '''
-Приложение вешается на сигнал, который Django посылает в случае фатальных
-ошибок и логирует значения и полные traceback'и исключений в логгеры
-'exception' и 'traceback' соответственно.
+The application works automatically: it listents for a signal that Django sends
+on all uncaught server errors and then logs short exception values and full
+tracebacks into their respective log channels.
 
-Хендлеры для логгеров можно настраивать в проекте, а можно попросить
-django_errorlog создать дефолтные. Для этого надо импортировать к себе
-настройки из django_errorlog.settings и прописать свои имена файлов в
-EXCEPTION_LOG_FILE и TRACEBACK_LOG_FILE.
-
-
-Есть две вспомогательные функции в модуле utils: log_error и log_warning,
-которые нужны, если в общий лог ошибок надо слогировать exception вручную.
-Обе функции принимают либо exc_info, либо, если вызваны без параметров, берут
-его из sys.exc_info() - текущего обрабатываемого исключения.
+There are two utility functions in django_errorlog.utils: log_error and
+log_warning. They can be used to manually log exception that you do handle in
+your code. They accept exc_info (a triple of (exceptions, value, traceback) as
+an argument. If called without arguments they get it from sys.exc_info().
 '''
