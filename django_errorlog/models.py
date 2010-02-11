@@ -81,7 +81,7 @@ def _log_exc_info(exc_info=None, level=logging.ERROR, aditional_lines=None):
     while inner.tb_next:
         inner = inner.tb_next
     lineno = inner.tb_lineno
-    module_name = inner.tb_frame.f_globals['__name__']
+    module_name = inner.tb_frame.f_globals.get('__name__', '<unknown>')
     exception_logger.log(level, '%-20s %s:%s %s' % (
         exception.__name__,
         module_name,
