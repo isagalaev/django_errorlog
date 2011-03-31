@@ -1,3 +1,12 @@
+DISCLAIMER!
+
+As of release 1.3 Django uses standard Python logging for everything, including
+request exception. Thus django_errorlog is no longer needed. See Django docs
+for [setting up logging handlers][0].
+
+[0]: http://docs.djangoproject.com/en/1.3/topics/logging/
+
+
 ## WHAT'S THIS
 
 By default Django sends server errors by email which might be not convenient

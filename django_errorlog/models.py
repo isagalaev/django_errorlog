@@ -5,10 +5,17 @@ import re
 import traceback
 import logging
 from logging import handlers
+import warnings
 
+import django
 from django.core import signals
 from django.utils.encoding import smart_str
 from django.conf import settings
+
+
+major, minor, release, stage, _ = django.VERSION
+if (major, minor, release, stage) >= (1, 3, 0, 'final'):
+    warnings.warn('Django_errorlog is obsolete. Setup logging using standard Django settings', DeprecationWarning)
 
 def _get_logger(name, setting_name):
     '''
